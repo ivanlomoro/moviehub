@@ -1,13 +1,16 @@
 import { Router, Request, Response } from "express";
-import { createUser, deleteUser, getAllUsers, updateUser } from "../controllers/user.controllers";
+import { createUser, deleteUser, getAllUsers, getUserById, updateUser,  } from "../controllers/user.controllers";
+import { check } from "../middleware/check.middleware";
 
 const userRoutes = Router();
 
 userRoutes.get("/", getAllUsers);
 
-userRoutes.post("/", createUser);
+userRoutes.get("/:userId", getUserById);
 
-userRoutes.put("/:userID", updateUser);
+userRoutes.post("/", check, createUser);
+
+userRoutes.patch("/:userId", updateUser);
 
 userRoutes.delete("/:userID", deleteUser);
 
