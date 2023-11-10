@@ -4,6 +4,7 @@ interface IUserDocument extends Document {
     name: string;
     email: string;
     password: string;
+    movies?: string[];
     createdAt?: Date;
     updateAt?: Date;
 }
@@ -21,7 +22,8 @@ const UserSchema = new Schema<IUserDocument>({
     password: {
         type: String,
         required: [true, "Password is required"]
-    }
+    },
+    movies: [{ type: Schema.Types.ObjectId, ref: 'Movies' }]
 });
 
 const UserModel = model<IUserDocument>("User", UserSchema);

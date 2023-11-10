@@ -23,7 +23,7 @@ export const getUserById = async (req: Request, res: Response) => {
     const { userId } = req.params;
 
     try {
-        const user = await UserModel.findById({ _id: userId });
+        const user = await UserModel.findById({ _id: userId }).populate('movies');
 
         res.status(200).json(user);
     } catch (error) {
