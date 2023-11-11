@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { createUser, deleteUser, getAllUsers, getUserById, updateUser,  } from "../controllers/user.controllers";
+import { createUser, deleteAllUsers, deleteUser, getAllUsers, getUserById, updateUser,  } from "../controllers/user.controllers";
 import { check } from "../middleware/check.middleware";
 
 const userRoutes = Router();
@@ -12,6 +12,8 @@ userRoutes.post("/", check, createUser);
 
 userRoutes.patch("/:userId", updateUser);
 
-userRoutes.delete("/:userID", deleteUser);
+userRoutes.delete("/:userId", deleteUser);
+
+userRoutes.delete('/', deleteAllUsers);
 
 export default userRoutes;

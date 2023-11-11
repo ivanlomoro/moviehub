@@ -1,8 +1,14 @@
 import { Request, Response } from "express"
 import UserModel from "../models/user.model";
 
-export const getAllUsers = (req: Request, res: Response) => {
-    res.status(200).send("Get all users");
+export const getAllUsers = async (req: Request, res: Response) => {
+    try {
+        const users = await UserModel.find().populate('movies');
+        res.status(201).json(users)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+
 }
 
 export const createUser = async (req: Request, res: Response) => {
@@ -42,13 +48,29 @@ export const updateUser = async (req: Request, res: Response) => {
             },
             { new: true }
         );
-        
+
         res.status(201).json(user)
     } catch (error) {
         res.status(500).json(error);
     }
 }
 
-export const deleteUser = (req: Request, res: Response) => {
-    res.status(200).send("User deleted");
+export const deleteUser = async (req: Request, res: Response) => {
+    const { userId } = req.params;
+
+    try {
+        const user = await UserModel.findByIdAndDelete({ _id: userId })
+        res.status(204).json(user)
+    } catch (error) {
+        res.status(500).json(error)
+    }
 }
+
+export const deleteAllUsers = async (req: Request, res: Response) => {
+    try {
+        const users = await UserModel.deleteMany({});
+        res.status(204).json(users);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
