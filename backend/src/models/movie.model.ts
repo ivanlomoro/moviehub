@@ -1,20 +1,19 @@
 import { Document, model, Schema } from 'mongoose';
 
-interface IMovieDocument extends Document {
-    name: string;
+export interface IMovieDocument extends Document {
+    title: string;
     poster_image: string;
     score: number;
-/*     genre: IGenreDocument['_id'];
- */
+    genre: string;
     createdAt: Date;
     updatedAt: Date;
 }
 
 const MovieSchema = new Schema<IMovieDocument>(
     {
-        name: {
+        title: {
             type: String,
-            required: [true, 'Name is required'],
+            required: [true, 'Title is required'],
         },
         poster_image: {
             type: String,
@@ -24,8 +23,11 @@ const MovieSchema = new Schema<IMovieDocument>(
             type: Number,
             required: [true, 'Score is required'],
         },
-/*         genre: { type: Schema.Types.ObjectId, ref: 'Genre', required: [true, 'Genre is required'] },
- */    },
+        genre: {
+            type: String,
+            required: [true, 'Genre is required']
+        },
+    },
     { timestamps: true, versionKey: false }
 );
 
