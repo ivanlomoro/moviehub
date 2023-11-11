@@ -1,5 +1,4 @@
 import { Document, model, Schema } from 'mongoose';
-import { IMovieDocument } from './movie.model';
 
 export interface IGenreDocument extends Document {
     name: string;
@@ -14,9 +13,7 @@ const genreSchema = new Schema<IGenreDocument>({
         required: [true, 'Genre is required'],
         unique: true
     },
-    movies: {
-        type: [String]
-    }
+    movies: [{ type: Schema.Types.ObjectId, ref: 'Movies' }],
 },
     { timestamps: true, versionKey: false }
 )

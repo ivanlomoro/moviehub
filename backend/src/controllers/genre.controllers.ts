@@ -3,7 +3,7 @@ import GenreModel from "../models/genre.model";
 
 export const getAllGenres = async (req: Request, res: Response) => {
     try {
-        const genres = await GenreModel.find()
+        const genres = await GenreModel.find().populate('movies')
         res.status(200).json(genres)
     } catch (error) {
         res.status(500).json(error)
@@ -13,7 +13,7 @@ export const getAllGenres = async (req: Request, res: Response) => {
 export const getGenreById = async (req: Request, res: Response) => {
     const { genreId } = req.params
     try {
-        const genres = await GenreModel.findById({ _id: genreId })
+        const genres = await GenreModel.findById({ _id: genreId }).populate('movies')
         res.status(200).json(genres)
     } catch (error) {
         res.status(500).json(error)
