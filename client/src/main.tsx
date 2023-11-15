@@ -1,9 +1,20 @@
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import { BrowserRouter } from "react-router-dom";
+import { Auth0Provider } from '@auth0/auth0-react'
+
+const { VITE_AUTH0_DOMAIN: domain, VITE_AUTH0_CLIENT_ID: clientId } = import.meta.env
+const redirect_Uri = window.location.origin;
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
-        <App />
+        <Auth0Provider
+            domain={domain}
+            clientId={clientId}
+            authorizationParams={{
+                redirect_uri: redirect_Uri
+            }}>
+            <App />
+        </Auth0Provider>
     </BrowserRouter>
 )

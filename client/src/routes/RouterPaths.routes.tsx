@@ -1,15 +1,15 @@
-import {Route, Routes, Navigate} from 'react-router-dom'
+import { Route, Routes} from 'react-router-dom'
 import Home from '../Page/Home'
+import LoginPage from '../Page/LoginPage'
 
 const RouterPaths = () => {
   return (
     <>
-    <Routes>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/" element={<Navigate to="/home" />} />
-    </Routes>
-
-</>
+      </Routes>
+    </>
   )
 }
 
