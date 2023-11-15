@@ -1,10 +1,10 @@
+import RouterPaths from "./routes/RouterPaths.routes"
+
 function App() {
 
   return (
     <>
-      <p>
-        Hello world
-      </p>
+      <RouterPaths/>
     </>
   )
 }
