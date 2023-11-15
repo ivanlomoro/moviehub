@@ -1,9 +1,10 @@
 import { Request, Response } from "express"
-import prisma from "../db/client";
+import { prismaClient } from "../db/client";
+import { convertToType } from "../helpers/utils";
 
 export const getAllUsers = async (req: Request, res: Response) => {
     try {
-        const users = await prisma.user.findMany({
+        const users = await prismaClient.user.findMany({
             include: {
                 movies: true,
             },
@@ -20,7 +21,7 @@ export const createUser = async (req: Request, res: Response) => {
     try {
         if (!name || !email || !password) throw new Error("Missing fields");
 
-        const newUser = await prisma.user.create({ data: { name, email, password } });
+        const newUser = await prismaClient.user.create({ data: { name, email, password } });
 
         res.status(201).json(newUser);
     } catch (error) {
@@ -32,9 +33,9 @@ export const getUserById = async (req: Request, res: Response) => {
     const { userId } = req.params;
 
     try {
-        const user = await prisma.user.findUnique({
+        const user = await prismaClient.user.findUnique({
             where: {
-                id: userId
+                id: convertToType(userId)
             },
             include: {
                 movies: true
@@ -50,8 +51,8 @@ export const updateUser = async (req: Request, res: Response) => {
     const { userId } = req.params;
     const { name, email } = req.body;
     try {
-        const user = await prisma.user.update({
-            where: { id: userId },
+        const user = await prismaClient.user.update({
+            where: { id: convertToType(userId) },
             data: { name, email },
         });
 
@@ -65,8 +66,8 @@ export const deleteUser = async (req: Request, res: Response) => {
     const { userId } = req.params;
 
     try {
-        const user = await prisma.user.delete({
-            where: { id: userId }
+        const user = await prismaClient.user.delete({
+            where: { id: convertToType(userId) }
         });
         res.status(204).json(user)
     } catch (error) {
@@ -76,7 +77,7 @@ export const deleteUser = async (req: Request, res: Response) => {
 
 export const deleteAllUsers = async (req: Request, res: Response) => {
     try {
-        const users = await prisma.user.deleteMany({});
+        const users = await prismaClient.user.deleteMany({});
         res.status(204).json(users);
     } catch (error) {
         res.status(500).json(error);

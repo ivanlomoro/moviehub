@@ -1,10 +1,10 @@
 import { Response, Request } from "express";
-import GenreModel from "../models/genre.model";
-import prisma from "../db/client";
+import { prismaClient } from "../db/client";
+import { convertToType } from "../helpers/utils";
 
 export const getAllGenres = async (req: Request, res: Response) => {
     try {
-        const genres = await prisma.genre.findMany({
+        const genres = await prismaClient.genre.findMany({
             include: {
                 movies: true,
             },
@@ -20,9 +20,9 @@ export const getGenreById = async (req: Request, res: Response) => {
     const { genreId } = req.params;
 
     try {
-        const genre = await prisma.genre.findUnique({
+        const genre = await prismaClient.genre.findUnique({
             where: {
-                id: genreId,
+                id: convertToType(genreId),
             },
             include: {
                 movies: true,
@@ -47,7 +47,7 @@ export const createGenre = async (req: Request, res: Response) => {
             throw new Error("Missing fields");
         }
 
-        const newGenre = await prisma.genre.create({
+        const newGenre = await prismaClient.genre.create({
             data: {
                 name,
             },
@@ -61,12 +61,12 @@ export const createGenre = async (req: Request, res: Response) => {
 
 export const updateGenre = async (req: Request, res: Response) => {
     const { genreId } = req.params;
-    const { name} = req.body;
+    const { name } = req.body;
 
     try {
-        const updatedGenre = await prisma.genre.update({
+        const updatedGenre = await prismaClient.genre.update({
             where: {
-                id: genreId,
+                id: convertToType(genreId),
             },
             data: {
                 name,
@@ -86,9 +86,9 @@ export const deleteGenreById = async (req: Request, res: Response) => {
     const { genreId } = req.params;
 
     try {
-        const deletedGenre = await prisma.genre.delete({
+        const deletedGenre = await prismaClient.genre.delete({
             where: {
-                id: genreId,
+                id: convertToType(genreId),
             },
         });
         res.status(204).send(deletedGenre);
@@ -99,7 +99,7 @@ export const deleteGenreById = async (req: Request, res: Response) => {
 
 export const deleteAllGenres = async (req: Request, res: Response) => {
     try {
-        const genres = await prisma.genre.deleteMany({});
+        const genres = await prismaClient.genre.deleteMany({});
         res.status(204).json(genres);
     } catch (error) {
         res.status(500).json(error);

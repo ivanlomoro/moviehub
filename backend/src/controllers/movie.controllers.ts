@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
-import prisma from "../db/client";
+import { prismaClient } from "../db/client";
+import { convertToType } from "../helpers/utils";
 
 
 export const getAllMovies = async (req: Request, res: Response) => {
     try {
-        const movies = await prisma.movies.findMany({
+        const movies = await prismaClient.movies.findMany({
             include: {
                 Genre: true
             },
@@ -21,7 +22,7 @@ export const createMovie = async (req: Request, res: Response) => {
     const { userId } = req.params;
 
     try {
-        const genreModel = await prisma.genre.findUnique({
+        const genreModel = await prismaClient.genre.findUnique({
             where: {
                 name: genre,
             },
@@ -31,17 +32,17 @@ export const createMovie = async (req: Request, res: Response) => {
             return res.status(404).json({ message: 'Genre not found' });
         }
 
-        const movie = await prisma.movies.create({
+        const movie = await prismaClient.movies.create({
             data: {
                 title,
                 poster_image,
                 score,
                 genre,
                 Genre: {
-                    connect: { id: genreModel.id },
+                    connect: { id: convertToType(genreModel.id) },
                 },
                 User: {
-                    connect: { id: userId },
+                    connect: { id: convertToType(userId) },
                 },
             },
         });
@@ -55,9 +56,9 @@ export const createMovie = async (req: Request, res: Response) => {
 export const getMovieById = async (req: Request, res: Response) => {
     const { movieId } = req.params
     try {
-        const movie = await prisma.movies.findUnique({
+        const movie = await prismaClient.movies.findUnique({
             where: {
-                id: movieId,
+                id: convertToType(movieId),
             },
             include: {
                 Genre: true,
@@ -74,9 +75,9 @@ export const updateMovie = async (req: Request, res: Response) => {
     const { movieId } = req.params
 
     try {
-        const movie = await prisma.movies.update({
+        const movie = await prismaClient.movies.update({
             where: {
-                id: movieId,
+                id: convertToType(movieId),
             },
             data: {
                 title,
@@ -99,9 +100,9 @@ export const deleteMovieById = async (req: Request, res: Response) => {
     const { movieId } = req.params
 
     try {
-        const deletedMovie = await prisma.movies.delete({
+        const deletedMovie = await prismaClient.movies.delete({
             where: {
-                id: movieId,
+                id: convertToType(movieId),
             },
         })
         res.status(204).send("Movie deleted: " + deletedMovie.title)
@@ -113,7 +114,7 @@ export const deleteMovieById = async (req: Request, res: Response) => {
 
 export const deleteAllMovies = async (req: Request, res: Response) => {
     try {
-        const users = await prisma.movies.deleteMany({});
+        const users = await prismaClient.movies.deleteMany({});
         res.status(204).json(users);
     } catch (error) {
         res.status(500).json(error);
