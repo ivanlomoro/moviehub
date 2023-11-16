@@ -7,10 +7,17 @@ type TCONFIG = {
 type EnvironmentConfig = {
     app: AppConfig;
     db: MongoDBConfig;
+    auth0?: Auth0Config;
 };
 
-type MongoDBConfig ={
-    URI:string;
+type Auth0Config = {
+    client_origin: string | undefined;
+    audience: string | undefined;
+    issuer: string | undefined;
+};
+
+type MongoDBConfig = {
+    URI: string;
 }
 
 type AppConfig = {
@@ -32,6 +39,11 @@ const CONFIG: TCONFIG = {
         },
         db: {
             URI: process.env.MONGO_URI_DEV || 'mongodb://localhost:27017/test_development'
+        },
+        auth0: {
+            client_origin: process.env.APP_ORIGIN,
+            audience: process.env.AUTH0_AUDIENCE,
+            issuer: process.env.AUTH0_ISSUER
         }
     },
     production: {

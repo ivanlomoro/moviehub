@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom"
 import "./Header.styles.css"
 import { FiLogOut } from 'react-icons/fi'
+import { useAuth0 } from '@auth0/auth0-react'
 
 export function Header() {
+
+    const { user } = useAuth0()
 
     return (
         <header>
@@ -12,10 +15,10 @@ export function Header() {
                 </Link>
                 <div className="cart">
                     <span className="user-info">
-                        Welcome back!
+                        Welcome back {user?.name} !
                     </span>
                     <div className="user-icon">
-                        <img src="./src/assets/imgs/moviehatlogo.png" alt="Icon" />
+                        <img src={user?.picture} alt={user?.name} />
                     </div>
 
                     <button style={{ width: "3rem", height: "3rem", position: "relative", border: "none", backgroundColor: "transparent" }} onClick={() => {
