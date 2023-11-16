@@ -7,18 +7,17 @@ type PrivateRoutesProps = {
   children: ReactNode
 }
 
-const PrivateRoutes: FC<PrivateRoutesProps> = ({children}) => {
+const PrivateRoutes: FC<PrivateRoutesProps> = ({ children }) => {
 
-  const { user, isAuthenticated, isLoading} = useAuth0();
-  console.log("User:",user)
-  console.log("isAuthenticated:",isAuthenticated)
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  console.log("User:", user)
+  console.log("isAuthenticated:", isAuthenticated)
 
   if (isLoading) {
     return <div>Loading...</div>
-}
-
+  }
   return (
-    isAuthenticated ? children: <Navigate to="/" replace={true}/>
+    isAuthenticated ? children : <Navigate to="/" replace={true} />
   )
 }
 
