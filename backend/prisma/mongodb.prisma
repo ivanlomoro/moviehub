@@ -17,7 +17,6 @@ model User {
   updatedAt DateTime @updatedAt
   email     String   @unique
   name      String
-  password  String
   movies    Movies[]
 
   @@map("users")

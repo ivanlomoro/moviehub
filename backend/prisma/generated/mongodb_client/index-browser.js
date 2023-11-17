@@ -16,11 +16,11 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 5.5.2
+ * Prisma Client JS version: 5.6.0
  * Query Engine version: aebc046ce8b88ebbcb45efe31cbe7d06fd6abc0a
  */
 Prisma.prismaVersion = {
-  client: "5.5.2",
+  client: "5.6.0",
   engine: "aebc046ce8b88ebbcb45efe31cbe7d06fd6abc0a"
 }
 
@@ -105,8 +105,7 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   email: 'email',
-  name: 'name',
-  password: 'password'
+  name: 'name'
 };
 
 exports.Prisma.MoviesScalarFieldEnum = {

@@ -205,7 +205,7 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 5.5.2
+   * Prisma Client JS version: 5.6.0
    * Query Engine version: aebc046ce8b88ebbcb45efe31cbe7d06fd6abc0a
    */
   export type PrismaVersion = {
@@ -1083,7 +1083,6 @@ export namespace Prisma {
     updatedAt: Date | null
     email: string | null
     name: string | null
-    password: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1092,7 +1091,6 @@ export namespace Prisma {
     updatedAt: Date | null
     email: string | null
     name: string | null
-    password: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1101,7 +1099,6 @@ export namespace Prisma {
     updatedAt: number
     email: number
     name: number
-    password: number
     _all: number
   }
 
@@ -1112,7 +1109,6 @@ export namespace Prisma {
     updatedAt?: true
     email?: true
     name?: true
-    password?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1121,7 +1117,6 @@ export namespace Prisma {
     updatedAt?: true
     email?: true
     name?: true
-    password?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1130,7 +1125,6 @@ export namespace Prisma {
     updatedAt?: true
     email?: true
     name?: true
-    password?: true
     _all?: true
   }
 
@@ -1212,7 +1206,6 @@ export namespace Prisma {
     updatedAt: Date
     email: string
     name: string
-    password: string
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1238,7 +1231,6 @@ export namespace Prisma {
     updatedAt?: boolean
     email?: boolean
     name?: boolean
-    password?: boolean
     movies?: boolean | User$moviesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -1249,7 +1241,6 @@ export namespace Prisma {
     updatedAt?: boolean
     email?: boolean
     name?: boolean
-    password?: boolean
   }
 
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1269,7 +1260,6 @@ export namespace Prisma {
       updatedAt: Date
       email: string
       name: string
-      password: string
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1697,7 +1687,6 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly email: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
-    readonly password: FieldRef<"User", 'String'>
   }
     
 
@@ -4159,8 +4148,7 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     email: 'email',
-    name: 'name',
-    password: 'password'
+    name: 'name'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -4280,7 +4268,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     email?: StringFilter<"User"> | string
     name?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
     movies?: MoviesListRelationFilter
   }
 
@@ -4290,7 +4277,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     email?: SortOrder
     name?: SortOrder
-    password?: SortOrder
     movies?: MoviesOrderByRelationAggregateInput
   }
 
@@ -4303,7 +4289,6 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     name?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
     movies?: MoviesListRelationFilter
   }, "id" | "email">
 
@@ -4313,7 +4298,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     email?: SortOrder
     name?: SortOrder
-    password?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -4328,7 +4312,6 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     email?: StringWithAggregatesFilter<"User"> | string
     name?: StringWithAggregatesFilter<"User"> | string
-    password?: StringWithAggregatesFilter<"User"> | string
   }
 
   export type MoviesWhereInput = {
@@ -4467,7 +4450,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     email: string
     name: string
-    password: string
     movies?: MoviesCreateNestedManyWithoutUserInput
   }
 
@@ -4477,7 +4459,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     email: string
     name: string
-    password: string
     movies?: MoviesUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -4486,7 +4467,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     movies?: MoviesUpdateManyWithoutUserNestedInput
   }
 
@@ -4495,7 +4475,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     movies?: MoviesUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -4505,7 +4484,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     email: string
     name: string
-    password: string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -4513,7 +4491,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -4521,7 +4498,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
   }
 
   export type MoviesCreateInput = {
@@ -4693,7 +4669,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     email?: SortOrder
     name?: SortOrder
-    password?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -4702,7 +4677,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     email?: SortOrder
     name?: SortOrder
-    password?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -4711,7 +4685,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     email?: SortOrder
     name?: SortOrder
-    password?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -5227,7 +5200,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     email: string
     name: string
-    password: string
   }
 
   export type UserUncheckedCreateWithoutMoviesInput = {
@@ -5236,7 +5208,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     email: string
     name: string
-    password: string
   }
 
   export type UserCreateOrConnectWithoutMoviesInput = {
@@ -5279,7 +5250,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateWithoutMoviesInput = {
@@ -5287,7 +5257,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
   }
 
   export type GenreUpsertWithoutMoviesInput = {

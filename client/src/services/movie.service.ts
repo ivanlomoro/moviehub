@@ -41,6 +41,7 @@ export const getAllMoviesByUserId = async (userId: string) => {
     try {
         const response = await fetch(`${BASE_URL}/user/${userId}`);
         const data = await response.json();
+        console.log("Data",data);
         return data;
     } catch (error) {
         console.error(`Error al obtener las películas del usuario ${userId}`, error);

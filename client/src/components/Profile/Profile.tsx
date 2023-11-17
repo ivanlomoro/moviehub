@@ -1,10 +1,47 @@
-import { useAuth0 } from '@auth0/auth0-react'
+import { useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Profile = () => {
     const { user, isAuthenticated, isLoading } = useAuth0();
+    const navigate = useNavigate();
+    useEffect(() => {
+        const createOrLoginUser = async () => {
+            if (isAuthenticated && user) {
+                try {
+                    const response = await fetch('http://localhost:8080/user', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            name: user.name,
+                            email: user.email,
+                        }),
+                    });
+
+                    if (response.status === 201 || response.status === 409) {
+                        console.log('Usuario creado o existente');
+                        const user = await response.json();
+
+                        console.log(user)
+                        
+                    } else {
+                        console.error('Error al crear o verificar usuario');
+                    }
+                } catch (error) {
+                    console.error('Error de red al crear o verificar usuario', error);
+                }
+            }
+        };
+
+        createOrLoginUser();
+    }, [isAuthenticated, user, navigate]);
 
     if (isLoading) {
-        return <div>Loading...</div>
+        return <div>Loading...</div>;
     }
 
     return (
@@ -15,8 +52,7 @@ const Profile = () => {
                 <p>Email: {user?.email}</p>
             </div>
         )
-    )
+    );
+};
 
-}
-
-export default Profile
+export default Profile;

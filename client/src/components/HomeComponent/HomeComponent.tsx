@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMovieContext } from '../../context/MovieContext';
 import MovieCard from '../MovieCard/MovieCard';
 import "./HomeComponent.styles.css"
@@ -9,8 +9,10 @@ import Modal from '../Modal/Modal';
 
 
 const HomeComponent: React.FC = () => {
-    const { movies, createMovie } = useMovieContext();
+    const { movies, createMovie, fetchMovies } = useMovieContext();
+    const [loading, setLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
+
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -19,6 +21,15 @@ const HomeComponent: React.FC = () => {
     const closeModal = () => {
         setIsModalOpen(false);
     };
+
+    useEffect(() => {
+        const loadData = async () => {
+            fetchMovies();
+            setLoading(false);
+        };
+
+        loadData();
+    }, [fetchMovies]);
 
     return (
         <div>
@@ -32,6 +43,8 @@ const HomeComponent: React.FC = () => {
 
             <div className='container-swiper'>
                 <h2>{movies.length > 0 ? 'Your added movies' : 'No movies added'}</h2>
+                
+                
                 <Swiper
                     effect={'coverflow'}
                     spaceBetween={10}

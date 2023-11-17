@@ -15,6 +15,33 @@ export const getAllUsers = async (req: Request, res: Response) => {
     }
 };
 
+export const createUserOrLogin = async (req: Request, res: Response) => {
+    try {
+        const { name, email } = req.body;
+
+        if (!name || !email) {
+            throw new Error("Missing fields");
+        }
+        const existingUser = await prismaClient.user.findUnique({
+            where: {
+                email,
+            },
+        });
+        if (existingUser) {
+            res.status(409).json(existingUser);
+        } else {
+            const newUser = await prismaClient.user.create({
+                data: { name, email },
+            });
+
+            res.status(201).json(newUser);
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al procesar la solicitud' });
+    }
+};
+
 export const createUser = async (req: Request, res: Response) => {
     const { name, email, password } = req.body;
 
