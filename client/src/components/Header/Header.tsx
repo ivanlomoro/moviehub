@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom"
 import "./Header.styles.css"
 import { FiLogOut } from 'react-icons/fi'
-import { useAuth0 } from '@auth0/auth0-react'
+import { useAuth0, LogoutOptions } from '@auth0/auth0-react'
 
 export function Header() {
 
-    const { user } = useAuth0()
+    const { user, logout } = useAuth0()
 
     return (
         <header>
@@ -21,8 +21,8 @@ export function Header() {
                         <img src={user?.picture} alt={user?.name} />
                     </div>
 
-                    <button style={{ width: "3rem", height: "3rem", position: "relative", border: "none", backgroundColor: "transparent" }} onClick={() => {
-                    }} >
+                    <button style={{ width: "3rem", height: "3rem", position: "relative", border: "none", backgroundColor: "transparent" }}
+                        onClick={() => logout({ returnTo: window.location.origin } as LogoutOptions)} >
                         <FiLogOut className="logout-icon" />
                     </button>
                 </div>
