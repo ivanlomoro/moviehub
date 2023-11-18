@@ -11,7 +11,6 @@ const Login = () => {
         if (isLoading) return <h1>Loading...</h1>
 
         Navigate("/home")
-        // Navigate(USER + /wevwe)
     }
     return (
         <>

@@ -33,3 +33,21 @@
   font-weight: bold;
   color: var(--primary-color);
 }
+
+.delete-icon-trash {
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  color: var(--background-color);
+  transition: color 0.2s;
+}
+
+.delete-icon-trash:hover{
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.delete-button-trash{
+  background: none;
+  border: none;
+  cursor: pointer;
+}

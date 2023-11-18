@@ -8,6 +8,7 @@ interface Movie {
     poster_image: string;
     score: number;
     genre: string;
+    id:string;
 }
 
 interface User {

@@ -7,6 +7,8 @@ import 'swiper/css';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import Modal from '../Modal/Modal';
 import { FaCirclePlus } from "react-icons/fa6";
+import { deleteMovieById } from '../../services/movie.service';
+import Swal from 'sweetalert2';
 
 const HomeComponent: React.FC = () => {
     const { movies, createMovie, fetchMovies } = useMovieContext();
@@ -31,6 +33,37 @@ const HomeComponent: React.FC = () => {
             loadData();
         }
     }, [fetchMovies, movies]);
+
+    const handleDeleteMovie = async (movieId: string) => {
+        try {
+            const result = await Swal.fire({
+                title: 'Are you sure delete this movie?',
+                text: 'You won\'t be able to revert this.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#FF3B4B',
+                cancelButtonColor: '#677580',
+                confirmButtonText: 'Yes, delete it!'
+            });
+
+            if (result.isConfirmed) {
+                await deleteMovieById(movieId);
+                fetchMovies();
+                Swal.fire(
+                    'Deleted!',
+                    'Your movie has been deleted.',
+                    'success'
+                );
+            }
+        } catch (error) {
+            console.error('Error deleting movie', error);
+            Swal.fire(
+                'Error',
+                'There was an error trying to delete the movie.',
+                'error'
+            );
+        }
+    };
 
     return (
         <div>
@@ -69,6 +102,7 @@ const HomeComponent: React.FC = () => {
                                 genre={movie.genre}
                                 score={movie.score}
                                 posterImage={movie.poster_image}
+                                onDelete={() => handleDeleteMovie(movie.id)}
                             />
                         </SwiperSlide>
                     ))}

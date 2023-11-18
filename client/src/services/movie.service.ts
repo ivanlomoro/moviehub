@@ -48,3 +48,17 @@ export const getAllMoviesByUserId = async (userId: string) => {
         return [];
     }
 };
+
+export const deleteMovieById = async (movieId: string) => {
+    try {
+        const response = await fetch(`${BASE_URL}/${movieId}`, {
+            method: 'DELETE',
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error deleting movie: ${response.statusText}`);
+        }
+    } catch (error) {
+        console.error(`Error deleting movie`, error);
+    }
+};
