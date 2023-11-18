@@ -6,13 +6,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import Modal from '../Modal/Modal';
-
+import { FaCirclePlus } from "react-icons/fa6";
 
 const HomeComponent: React.FC = () => {
     const { movies, createMovie, fetchMovies } = useMovieContext();
-    const [loading, setLoading] = useState(true);
+    const [, setLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -24,27 +23,27 @@ const HomeComponent: React.FC = () => {
 
     useEffect(() => {
         const loadData = async () => {
-            fetchMovies();
+            await fetchMovies();
             setLoading(false);
         };
 
-        loadData();
-    }, [fetchMovies]);
+        if (movies.length === 0) {
+            loadData();
+        }
+    }, [fetchMovies, movies]);
 
     return (
         <div>
-            <h1>Home</h1>
-
-            <div>
-                <button onClick={openModal}>Abrir Modal</button>
-                <Modal isOpen={isModalOpen} onClose={closeModal} onCreateMovie={createMovie} />
+            <div className="title-and-button-container">
+                <h1 className='title-home'>{movies.length > 0 ? 'Your added movies ' : 'No movies added '}</h1>
+                <div>
+                    <button className="icon-button" onClick={openModal}>
+                        <FaCirclePlus className="add-icon" />
+                    </button>
+                    <Modal isOpen={isModalOpen} onClose={closeModal} onCreateMovie={createMovie} />
+                </div>
             </div>
-
-
             <div className='container-swiper'>
-                <h2>{movies.length > 0 ? 'Your added movies' : 'No movies added'}</h2>
-                
-                
                 <Swiper
                     effect={'coverflow'}
                     spaceBetween={10}
@@ -75,8 +74,6 @@ const HomeComponent: React.FC = () => {
                     ))}
                 </Swiper>
             </div>
-
-
         </div>
     );
 };

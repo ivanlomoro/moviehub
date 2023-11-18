@@ -14,7 +14,7 @@ export const getAllMovies = async () => {
         const data = await response.json();
         return data;
     } catch (error) {
-        console.error('Error al obtener las películas', error);
+        console.error('Error getting movies', error);
         return [];
     }
 };
@@ -30,10 +30,10 @@ export const createMovie = async (newMovie: Movie) => {
         });
 
         if (!response.ok) {
-            throw new Error(`Error al crear la película: ${response.statusText}`);
+            throw new Error(`Error creating movie: ${response.statusText}`);
         }
     } catch (error) {
-        console.error('Error al crear la película', error);
+        console.error('Error creating movie', error);
     }
 };
 
@@ -44,7 +44,7 @@ export const getAllMoviesByUserId = async (userId: string) => {
         console.log("Data",data);
         return data;
     } catch (error) {
-        console.error(`Error al obtener las películas del usuario ${userId}`, error);
+        console.error(`Error getting user's movies ${userId}`, error);
         return [];
     }
 };

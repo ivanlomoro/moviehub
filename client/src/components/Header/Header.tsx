@@ -10,7 +10,7 @@ export function Header() {
     return (
         <header>
             <div className="container">
-                <Link to="/">
+                <Link to="/home">
                     <img src="./src/assets/imgs/moviehatlogo.png" className="img-icon" alt="Icono" />
                 </Link>
                 <div className="cart">

@@ -23,16 +23,16 @@ const Profile = () => {
                     });
 
                     if (response.status === 201 || response.status === 409) {
-                        console.log('Usuario creado o existente');
+                        console.log('Created or existing user');
                         const user = await response.json();
 
                         console.log(user)
                         
                     } else {
-                        console.error('Error al crear o verificar usuario');
+                        console.error('Error creating or verifying user');
                     }
                 } catch (error) {
-                    console.error('Error de red al crear o verificar usuario', error);
+                    console.error('Network error creating or verifying user', error);
                 }
             }
         };

@@ -46,24 +46,43 @@
   color: var(--secondary-color); 
 }
 
-.modal-movie button {
-  background-color: var(--primary-color);
-  color: var(--text-color-secondary);
-  border: none;
-  padding: 12px 24px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
 
 .modal-movie .create-button {
-  background-color: var(--background-color);
+  text-decoration: none;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 2px 2px 10px black;
+  color: black;
+  background-color: var(--background-color-secondary);
+  background: linear-gradient(50deg, var(--background-color), var(--background-color-secondary));
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.modal-movie .create-button:hover {
+  background: linear-gradient(50deg, var(--background-color-secondary), var(--background-color));
+  transition: 0.5;
 }
 
 .modal-movie .close-button {
-  background-color: var(--secondary-color);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: var(--text-color-secondary);
+  border: none;
+  background-color: transparent;
+  font-size: 25px;
+  transition: 0.5s;
 }
 
-.modal-movie button:hover {
-  background-color: var(--secondary-color);
+.modal-movie .close-button:hover {
+  color: var(--background-color);
+  transition: 0.5s;
 }
+

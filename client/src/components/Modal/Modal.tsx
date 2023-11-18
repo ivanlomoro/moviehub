@@ -1,5 +1,6 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useEffect } from 'react';
 import './Modal.styles.css'
+import { IoMdClose } from "react-icons/io";
 
 interface ModalProps {
   isOpen: boolean;
@@ -21,6 +22,17 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
     score: 0,
     genre: '',
   });
+
+  useEffect(() => {
+    if (isOpen) {
+      setNewMovie({
+        title: '',
+        poster_image: '',
+        score: 0,
+        genre: '',
+      });
+    }
+  }, [isOpen]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -54,10 +66,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
         />
 
         <button className="create-button" onClick={handleCreateMovie}>
-          Crear Película
+          Add movie
         </button>
         <button className="close-button" onClick={onClose}>
-          Cerrar Modal
+          <IoMdClose />
         </button>
       </div>
     </div>

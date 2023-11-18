@@ -38,7 +38,7 @@ export const createUserOrLogin = async (req: Request, res: Response) => {
         }
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Error al procesar la solicitud' });
+        res.status(500).json({ error: 'Error processing request' });
     }
 };
 

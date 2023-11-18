@@ -32,18 +32,11 @@ interface MovieProviderProps {
 
 export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
     const [movies, setMovies] = useState<Movie[]>([]);
-    /*     const userId = '65524c31a2830e1a48b127f9'; */
     const [registerUser, setRegisterUser] = useState<User>();
-    console.log("registerUser:", registerUser)
     const { user, isAuthenticated } = useAuth0();
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetchMovies();
-    }, []);
-
-    useEffect(() => {
-        fetchMovies();
         const createOrLoginUser = async () => {
             if (isAuthenticated && user) {
                 try {
@@ -59,17 +52,16 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
                     });
 
                     if (response.status === 201 || response.status === 409) {
-                        console.log('Usuario creado o existente');
+                        console.log('Created or existing user');
                         const user = await response.json();
 
-                        setRegisterUser(user)
-                        console.log("User:", user)
-                        fetchMovies();
+                        setRegisterUser(user);
+                        console.log("User:", user);
                     } else {
-                        console.error('Error al crear o verificar usuario');
+                        console.error('Error creating or verifying user');
                     }
                 } catch (error) {
-                    console.error('Error de red al crear o verificar usuario', error);
+                    console.error('Network error creating or verifying user', error);
                 }
             }
         };
@@ -77,22 +69,24 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
         createOrLoginUser();
     }, [isAuthenticated, user, navigate]);
 
-    const fetchMovies = async () => {
+    const fetchData = async () => {
         if (registerUser) {
             const moviesData = await getAllMoviesByUserIdAPI(registerUser.id);
             setMovies(moviesData);
+            console.log("Fetching movies completed");
         }
     };
 
     const createMovie = async (newMovie: Omit<Movie, 'userId'> & { registerUser: User }): Promise<void> => {
         if (registerUser) {
             await createMovieAPI({ ...newMovie, userId: registerUser.id });
-            fetchMovies();
+            fetchData();
         }
     };
+
     const contextValue: MovieContextProps = {
         movies,
-        fetchMovies,
+        fetchMovies: fetchData,
         createMovie,
     };
 
