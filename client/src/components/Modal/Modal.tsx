@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import './Modal.styles.css'
 import { IoMdClose } from "react-icons/io";
+import { toast } from 'react-hot-toast';
 
 interface ModalProps {
   isOpen: boolean;
@@ -45,9 +46,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
   const handleCreateMovie = () => {
     onCreateMovie(newMovie);
     onClose();
+    toast.success('Movie added successfully!');
   };
 
-  const genreOptions = ['Action', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Sci-Fi', 'Thriller', 'Other'];
+  const genreOptions = ['Action', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Sci-Fi', 'Thriller','Suspense', 'Other'];
 
   return (
     <div className={`modal-overlay ${isOpen ? 'open' : ''}`}>

@@ -3,6 +3,7 @@ import { useMovieContext } from '../../context/MovieContext';
 import { IoMdClose } from 'react-icons/io';
 import './EditForm.styles.css';
 import { Movie, getMovieById, updateMovieById } from '../../services/movie.service';
+import { toast } from 'react-hot-toast';
 
 interface EditFormProps {
   movieId: string | undefined;
@@ -48,12 +49,13 @@ const EditForm: React.FC<EditFormProps> = ({ movieId, onClose }) => {
       await updateMovieById(movieId || '', editedMovie as Movie);
       onClose();
       fetchMovies();
+      toast.success('Movie updated successfully!');
     } catch (error) {
       console.error('Error updating movie', error);
     }
   };
 
-  const genreOptions = ['Action', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Sci-Fi', 'Thriller', 'Other'];
+  const genreOptions = ['Action', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Sci-Fi', 'Thriller','Suspense', 'Other'];
 
   return (
     <div className="edit-form-overlay">
