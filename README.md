@@ -1,7 +1,6 @@
 <div align="center">
   <img src="https://res.cloudinary.com/dgxkfjsbz/image/upload/v1700266473/moviehub/Logo/moviehatlogo_e0c3g1.png" alt="MovieHat" width="300">
 </div>
-
 # MovieHat 🎬
 
 ## Introduction
