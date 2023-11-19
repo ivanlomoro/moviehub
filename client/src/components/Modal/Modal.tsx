@@ -34,7 +34,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
     }
   }, [isOpen]);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setNewMovie((prevMovie) => ({
       ...prevMovie,
@@ -47,12 +47,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
     onClose();
   };
 
+  const genreOptions = ['Action', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Sci-Fi', 'Thriller', 'Other'];
+
   return (
     <div className={`modal-overlay ${isOpen ? 'open' : ''}`}>
       <div className="modal-movie">
         <input type="text" name="title" placeholder='Title' value={newMovie.title} onChange={handleInputChange} />
         <input type="text" name="poster_image" placeholder='Poster' value={newMovie.poster_image} onChange={handleInputChange} />
-        <input type="text" name="genre" placeholder='Genre' value={newMovie.genre} onChange={handleInputChange} />
         <input
           type="text"
           placeholder="Rate (1-10)"
@@ -64,6 +65,14 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
             }
           }}
         />
+        <select name="genre" value={newMovie.genre} onChange={handleInputChange}>
+          <option value="" disabled>Select Genre</option>
+          {genreOptions.map((genre, index) => (
+            <option key={index} value={genre}>
+              {genre}
+            </option>
+          ))}
+        </select>
 
         <button className="create-button" onClick={handleCreateMovie}>
           Add movie

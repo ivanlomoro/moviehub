@@ -1,25 +1,49 @@
-import { useAuth0 } from '@auth0/auth0-react'
-import { protectedRequest, publicRequest } from '../../services/request.service';
+import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
+import './Login-styles.css';
 
 const Login = () => {
-    const { getAccessTokenSilently, loginWithPopup, isLoading } = useAuth0();
-    const Navigate = useNavigate()
+    const { user, isAuthenticated, loginWithPopup } = useAuth0();
+    const navigate = useNavigate();
 
-    const login = async () => {
-        await loginWithPopup()
-        if (isLoading) return <h1>Loading...</h1>
+    const handleLogin = async () => {
+        try {
+            await loginWithPopup();
 
-        Navigate("/home")
-    }
+            if (isAuthenticated && user) {
+                const response = await fetch('http://localhost:8080/user', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: user.name,
+                        email: user.email,
+                    }),
+                });
+
+                if (response.status === 201 || response.status === 409) {
+                    console.log('Created or existing user');
+                    const userData = await response.json();
+                    console.log(userData);
+                } else {
+                    console.error('Error creating or verifying user');
+                }
+            }
+            navigate('/home');
+        } catch (error) {
+            console.error('Error during login', error);
+        }
+    };
+
     return (
         <>
-            <button onClick={login}>Login</button>
-            <button onClick={() => publicRequest()}>Public Request</button>
-            <button onClick={() => protectedRequest(getAccessTokenSilently)}>Protected Request</button>
+            <div className="login-container">
+                <img src="./src/assets/imgs/moviehatlogo.png" className="img-icon-login" alt="Icono" />
+                <button className="login-btn" onClick={handleLogin}>Login</button>
+            </div>
         </>
+    );
+};
 
-    )
-}
-
-export default Login
+export default Login;

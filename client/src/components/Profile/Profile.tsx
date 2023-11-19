@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
+import { publicRequest, protectedRequest } from '../../services/request.service';
 
 
 
 const Profile = () => {
-    const { user, isAuthenticated, isLoading } = useAuth0();
+    const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
     const navigate = useNavigate();
     useEffect(() => {
         const createOrLoginUser = async () => {
@@ -27,7 +28,7 @@ const Profile = () => {
                         const user = await response.json();
 
                         console.log(user)
-                        
+
                     } else {
                         console.error('Error creating or verifying user');
                     }
@@ -50,6 +51,8 @@ const Profile = () => {
                 <img src={user?.picture} alt={user?.name} />
                 <h2>{user?.name}</h2>
                 <p>Email: {user?.email}</p>
+                <button onClick={() => publicRequest()}>Public Request</button>
+                <button onClick={() => protectedRequest(getAccessTokenSilently)}>Protected Request</button>
             </div>
         )
     );

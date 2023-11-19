@@ -24,7 +24,7 @@
   text-align: center;
   z-index: 2;
   position: relative;
-  box-shadow: 1.5px -0.5px 6px 3px rgba(112,112,112,0.58);
+  box-shadow: 1.5px -0.5px 6px 3px rgba(112, 112, 112, 0.58);
 }
 
 .modal-movie input {
@@ -33,19 +33,51 @@
   margin-bottom: 16px;
   margin-right: 1rem;
   border: none;
-  border-bottom: 1px solid var(--background-color-secondary); 
-  background: transparent; 
-  border-radius: 0; 
-  outline: none; 
+  border-bottom: 1px solid var(--background-color-secondary);
+  background: transparent;
+  border-radius: 0;
+  outline: none;
   color: var(--background-color-secondary);
   font-size: 20px;
 }
 
 .modal-movie input::placeholder {
-  font-size: 20px; 
-  color: var(--secondary-color); 
+  font-size: 20px;
+  color: var(--secondary-color);
 }
 
+.modal-movie select {
+  width: calc(100% - -8px);
+  padding: 10px;
+  margin-bottom: 16px;
+  margin-right: 1rem;
+  border: none;
+  border-bottom: 1px solid var(--background-color-secondary);
+  background: transparent;
+  border-radius: 0;
+  outline: none;
+  color: var(--background-color-secondary);
+  font-size: 20px;
+  appearance: none;
+}
+
+.modal-movie select::after {
+  content: '▼';
+  font-size: 20px;
+  color: var(--background-color-secondary);
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+
+.modal-movie select option {
+  background-color: var(--background-color);
+  color: var(--background-color-secondary);
+  font-size: 20px;
+}
 
 .modal-movie .create-button {
   text-decoration: none;
@@ -85,4 +117,3 @@
   color: var(--background-color);
   transition: 0.5s;
 }
-

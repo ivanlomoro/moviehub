@@ -17,7 +17,7 @@ const PrivateRoutes: FC<PrivateRoutesProps> = ({ children }) => {
     return <div>Loading...</div>
   }
   return (
-    isAuthenticated ? children : <Navigate to="/" replace={true} />
+    isAuthenticated ? children : <Navigate to="/login"/>
   )
 }
 

@@ -114,6 +114,7 @@ header .login {
 
 .logout-icon {
     font-size: 35px;
+    cursor: pointer;
 }
 
 .cart-icon {
