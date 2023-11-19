@@ -5,7 +5,8 @@ export interface Movie {
     poster_image: string;
     score: number;
     genre: string;
-    userId: string;
+    userId?: string;
+    id?:string
 }
 
 export const getAllMovies = async () => {
@@ -60,5 +61,35 @@ export const deleteMovieById = async (movieId: string) => {
         }
     } catch (error) {
         console.error(`Error deleting movie`, error);
+    }
+};
+
+
+export const updateMovieById = async (movieId: string, updatedMovie: Movie) => {
+    try {
+        const response = await fetch(`${BASE_URL}/${movieId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedMovie),
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error updating movie: ${response.statusText}`);
+        }
+    } catch (error) {
+        console.error(`Error updating movie`, error);
+    }
+};
+
+export const getMovieById = async (movieId: string) => {
+    try {
+        const response = await fetch(`${BASE_URL}/${movieId}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(`Error getting movie by ID ${movieId}`, error);
+        throw error; 
     }
 };

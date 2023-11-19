@@ -1,6 +1,6 @@
-import React from 'react';
 import './MovieCard.styles.css'
 import { FaTrash } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 
 interface MovieCardProps {
     title: string;
@@ -9,9 +9,11 @@ interface MovieCardProps {
     posterImage: string;
     id?: string;
     onDelete: () => void;
+    onEdit: () => void;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ title, genre, score, posterImage, onDelete }) => {
+const MovieCard: React.FC<MovieCardProps> = ({ title, genre, score, posterImage, onDelete, onEdit }) => {
+
     return (
         <div className="movie-card">
             <img src={posterImage} alt={title} className="movie-card__image" />
@@ -19,6 +21,9 @@ const MovieCard: React.FC<MovieCardProps> = ({ title, genre, score, posterImage,
                 <h2 className="movie-card__title">{title}</h2>
                 <p className="movie-card__genre">Género: {genre}</p>
                 <p className="movie-card__score">Puntuación: {score}</p>
+                <button className="edit-button" onClick={onEdit}>
+                    <FaEdit className="edit-icon"/>
+                </button>
                 <button className="delete-button-trash" onClick={onDelete}>
                     <FaTrash className="delete-icon-trash" />
                 </button>

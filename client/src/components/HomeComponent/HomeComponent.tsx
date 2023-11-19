@@ -9,18 +9,30 @@ import Modal from '../Modal/Modal';
 import { FaCirclePlus } from "react-icons/fa6";
 import { deleteMovieById } from '../../services/movie.service';
 import Swal from 'sweetalert2';
+import EditForm from '../EditForm/EditForm';
 
 const HomeComponent: React.FC = () => {
     const { movies, createMovie, fetchMovies } = useMovieContext();
     const [, setLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const [isEditFormOpen, setIsEditFormOpen] = useState(false);
+    const [selectedMovieId, setSelectedMovieId] = useState<string | undefined>(undefined);
     const openModal = () => {
         setIsModalOpen(true);
     };
 
     const closeModal = () => {
         setIsModalOpen(false);
+    };
+
+    const openEditForm = (movieId: string) => {
+        setSelectedMovieId(movieId);
+        setIsEditFormOpen(true);
+    };
+
+    const closeEditForm = () => {
+        setSelectedMovieId(undefined);
+        setIsEditFormOpen(false);
     };
 
     useEffect(() => {
@@ -103,11 +115,13 @@ const HomeComponent: React.FC = () => {
                                 score={movie.score}
                                 posterImage={movie.poster_image}
                                 onDelete={() => handleDeleteMovie(movie.id)}
+                                onEdit={() => openEditForm(movie.id)}
                             />
                         </SwiperSlide>
                     ))}
                 </Swiper>
             </div>
+            {isEditFormOpen && selectedMovieId && <EditForm movieId={selectedMovieId} onClose={closeEditForm} />}
         </div>
     );
 };
