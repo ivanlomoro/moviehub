@@ -24,9 +24,7 @@ const Login = () => {
                 });
 
                 if (response.status === 201 || response.status === 409) {
-                    console.log('Created or existing user');
-                    const userData = await response.json();
-                    console.log(userData);
+                    await response.json();
                 } else {
                     console.error('Error creating or verifying user');
                 }

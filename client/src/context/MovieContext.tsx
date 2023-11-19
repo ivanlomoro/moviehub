@@ -54,11 +54,9 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
                     });
 
                     if (response.status === 201 || response.status === 409) {
-                        console.log('Created or existing user');
                         const user = await response.json();
 
                         setRegisterUser(user);
-                        console.log("User:", user);
                     } else {
                         console.error('Error creating or verifying user');
                     }
@@ -75,7 +73,6 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
         if (registerUser) {
             const moviesData = await getAllMoviesByUserIdAPI(registerUser.id);
             setMovies(moviesData);
-            console.log("Fetching movies completed");
         }
     };
 

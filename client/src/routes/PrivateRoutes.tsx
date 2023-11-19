@@ -9,9 +9,7 @@ type PrivateRoutesProps = {
 
 const PrivateRoutes: FC<PrivateRoutesProps> = ({ children }) => {
 
-  const { user, isAuthenticated, isLoading } = useAuth0();
-  console.log("User:", user)
-  console.log("isAuthenticated:", isAuthenticated)
+  const { isAuthenticated, isLoading } = useAuth0();
 
   if (isLoading) {
     return (
