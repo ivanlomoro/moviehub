@@ -54,3 +54,9 @@ Access the application at `http://localhost:your_port`.
 MovieHat is an exciting multi-repo project that provides a hands-on experience with various backend technologies. 
 
 ## Preview
+<table>
+  <tr>
+    <td><img src="client/src/assets/imgs/Preview/MovieHat_desktop.gif" alt="Desktop Version" width="400"/></td>
+    <td><img src="client/src/assets/imgs/Preview/moviehat_fullscreen.gif" alt="FullScreen Version" width="400"/></td>
+  </tr>
+</table>
