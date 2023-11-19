@@ -19,8 +19,8 @@ const MovieCard: React.FC<MovieCardProps> = ({ title, genre, score, posterImage,
             <img src={posterImage} alt={title} className="movie-card__image" />
             <div className="movie-card__info">
                 <h2 className="movie-card__title">{title}</h2>
-                <p className="movie-card__genre">Género: {genre}</p>
-                <p className="movie-card__score">Puntuación: {score}</p>
+                <p className="movie-card__genre">Genre: {genre}</p>
+                <p className="movie-card__score">Rate: {score}</p>
                 <button className="edit-button" onClick={onEdit}>
                     <FaEdit className="edit-icon"/>
                 </button>
