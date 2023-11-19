@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8080/movie';
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
 export interface Movie {
     title: string;
@@ -11,7 +11,7 @@ export interface Movie {
 
 export const getAllMovies = async () => {
     try {
-        const response = await fetch(BASE_URL);
+        const response = await fetch(`${apiUrl}/movie`);
         const data = await response.json();
         return data;
     } catch (error) {
@@ -22,7 +22,7 @@ export const getAllMovies = async () => {
 
 export const createMovie = async (newMovie: Movie) => {
     try {
-        const response = await fetch(`${BASE_URL}/${newMovie.userId}`, {
+        const response = await fetch(`${apiUrl}/movie/${newMovie.userId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ export const createMovie = async (newMovie: Movie) => {
 
 export const getAllMoviesByUserId = async (userId: string) => {
     try {
-        const response = await fetch(`${BASE_URL}/user/${userId}`);
+        const response = await fetch(`${apiUrl}/movie/user/${userId}`);
         const data = await response.json();
         console.log("Data",data);
         return data;
@@ -52,7 +52,7 @@ export const getAllMoviesByUserId = async (userId: string) => {
 
 export const deleteMovieById = async (movieId: string) => {
     try {
-        const response = await fetch(`${BASE_URL}/${movieId}`, {
+        const response = await fetch(`${apiUrl}/movie/${movieId}`, {
             method: 'DELETE',
         });
 
@@ -67,7 +67,7 @@ export const deleteMovieById = async (movieId: string) => {
 
 export const updateMovieById = async (movieId: string, updatedMovie: Movie) => {
     try {
-        const response = await fetch(`${BASE_URL}/${movieId}`, {
+        const response = await fetch(`${apiUrl}/movie/${movieId}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ export const updateMovieById = async (movieId: string, updatedMovie: Movie) => {
 
 export const getMovieById = async (movieId: string) => {
     try {
-        const response = await fetch(`${BASE_URL}/${movieId}`);
+        const response = await fetch(`${apiUrl}/movie/${movieId}`);
         const data = await response.json();
         return data;
     } catch (error) {

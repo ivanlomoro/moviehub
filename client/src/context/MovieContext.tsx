@@ -40,8 +40,9 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
     useEffect(() => {
         const createOrLoginUser = async () => {
             if (isAuthenticated && user) {
+                const apiUrl = import.meta.env.VITE_API_BASE_URL;
                 try {
-                    const response = await fetch('http://localhost:8080/user', {
+                    const response = await fetch(`${apiUrl}/user`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
