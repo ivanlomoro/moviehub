@@ -6,7 +6,7 @@
 
 ## Introduction
 
-Welcome to MovieHat, a comprehensive application for managing your movie list. MovieHat is a multi-repo project, consisting of two parts: the client (using pnpm) and the server (using npm). 
+Welcome to MovieHat, a comprehensive application for managing your movie list. MovieHat is a mono-repo project, consisting of two parts/folders: the client (using pnpm) and the server (using npm). 
 
 ## Features
 
