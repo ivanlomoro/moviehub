@@ -5,7 +5,7 @@
     text-align: center;
     flex-direction: column;
     background-image: linear-gradient(0deg,
-            rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://res.cloudinary.com/dgxkfjsbz/image/upload/v1700304135/vista-sala-cine-3d_ole3cw.jpg");
+            rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://res.cloudinary.com/dgxkfjsbz/image/upload/v1700304135/moviehub/Fondo%20de%20pantalla/vista-sala-cine-3d_ole3cw.jpg");
     color: var(--text-color-secondary);
     min-height: 100vh;
     background-repeat: no-repeat;
