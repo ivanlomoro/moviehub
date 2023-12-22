@@ -16,7 +16,6 @@ export const getAllUsers = async (req: Request, res: Response) => {
 };
 
 export const createUserOrLogin = async (req: Request, res: Response) => {
-    console.log("Esta corriendo el back")
     try {
         const { name, email } = req.body;
 
